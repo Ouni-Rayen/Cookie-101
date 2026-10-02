@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Securinets{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Dashboard</h1>
+    <p>Welcome, <strong>{{ user.username }}</strong>.</p>
+    <p>Your current role: <span class="badge">{{ user.role }}</span></p>
+
+    <hr>
+
+    <p>You can try accessing the <a href="{{ url_for('admin') }}">Admin Panel</a>.</p>
+    <p class="muted">Only users with the <code>admin</code> role are allowed.</p>
+</section>
+{% endblock %}

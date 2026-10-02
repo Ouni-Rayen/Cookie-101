@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Home - Securinets{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="hero-logo">
+    <h1>Securinets Member Portal</h1>
+    <p>Login to access your dashboard and club resources.</p>
+    <a href="{{ url_for('login') }}" class="btn">Login</a>
+</section>
+
+<section class="card">
+    <h2>Challenge Info</h2>
+    <p>This is a beginner web challenge about <strong>cookies</strong> and <strong>Base64</strong>.</p>
+    <p>Credentials: <code>guest</code> / <code>guest</code></p>
+    <p>Flag format: <code>Securinets{...}</code></p>
+</section>
+{% endblock %}

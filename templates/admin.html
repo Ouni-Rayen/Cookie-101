@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel - Securinets{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Admin Panel</h1>
+    <p>Access granted. Hello, <strong>{{ user.username }}</strong> (role: {{ user.role }}).</p>
+
+    <div class="flag-box">
+        <p class="label">Flag</p>
+        <p class="flag">{{ flag }}</p>
+    </div>
+</section>
+{% endblock %}

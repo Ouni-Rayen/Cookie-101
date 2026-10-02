@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #f4f5f7;
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
+/* Header */
+header {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.75rem 1.5rem;
+}
+
+.header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+nav a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    color: #1a1a1a;
+}
+
+/* Main */
+main {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.hero h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.hero p {
+    color: #555;
+    margin-bottom: 1.25rem;
+}
+
+/* Cards */
+.card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.card.narrow {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card h1, .card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    margin-bottom: 0.75rem;
+}
+
+.card hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 1.25rem 0;
+}
+
+/* Form */
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #666;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #333;
+}
+
+button.btn {
+    width: 100%;
+}
+
+/* Misc */
+.badge {
+    display: inline-block;
+    background: #eee;
+    color: #333;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.error {
+    background: #fde8e8;
+    color: #b91c1c;
+    padding: 0.6rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.hint {
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.muted {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+code {
+    background: #f0f0f0;
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 0.9em;
+}
+
+/* Flag */
+.flag-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.flag-box .label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.35rem;
+}
+
+.flag {
+    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    color: #888;
+    font-size: 0.85rem;
+    border-top: 1px solid #e0e0e0;
+    background: #fff;
+}
+
+/* Links inside cards */
+.card a {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
