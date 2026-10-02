@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>Your role: <span class="badge">{{ user.role }}</span></p>
+    <p class="muted">You are logged in successfully.</p>
+</section>
+{% endblock %}

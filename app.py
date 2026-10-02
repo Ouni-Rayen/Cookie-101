@@ -2,24 +2,22 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 import base64
 import json
 import os
+import re
 
 app = Flask(__name__)
 
-# Simple credentials for the challenge
-VALID_USER = "guest"
-VALID_PASS = "guest"
-
 FLAG = "Securinets{c00k13s_4nd_b4s364_4r3_n0t_s3cur3}"
+
+# In-memory user store (resets on restart — fine for CTF)
+USERS = {}
 
 
 def encode_cookie(data: dict) -> str:
-    """Encode a dict as base64(JSON)"""
     raw = json.dumps(data, separators=(",", ":"))
     return base64.b64encode(raw.encode()).decode()
 
 
 def decode_cookie(token: str):
-    """Decode base64 cookie back to dict. Returns None on failure."""
     try:
         raw = base64.b64decode(token.encode()).decode()
         return json.loads(raw)
@@ -27,68 +25,77 @@ def decode_cookie(token: str):
         return None
 
 
-@app.route("/")
+def get_current_user():
+    token = request.cookies.get("auth")
+    if not token:
+        return None
+    return decode_cookie(token)
+
+
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    """Login / Register page (this is the homepage)"""
+    user = get_current_user()
+    if user:
+        return redirect(url_for("home"))
 
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
     error = None
+    mode = request.args.get("mode", "login")  # login | register
+
     if request.method == "POST":
+        action = request.form.get("action", "login")
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
 
-        if username == VALID_USER and password == VALID_PASS:
-            # Set a cookie containing user info (base64 encoded JSON)
-            cookie_data = {
-                "username": username,
-                "role": "user"
-            }
-            token = encode_cookie(cookie_data)
+        if not username or not password:
+            error = "Username and password are required."
+            mode = action
+        elif not re.match(r"^[a-zA-Z0-9_]{3,20}$", username):
+            error = "Username must be 3-20 characters (letters, numbers, underscore)."
+            mode = action
+        elif action == "register":
+            if username in USERS:
+                error = "Username already taken."
+                mode = "register"
+            else:
+                USERS[username] = password
+                cookie_data = {"username": username, "role": "user"}
+                token = encode_cookie(cookie_data)
+                resp = make_response(redirect(url_for("home")))
+                resp.set_cookie("auth", token, httponly=False, samesite="Lax")
+                return resp
+        else:  # login
+            if username not in USERS or USERS[username] != password:
+                error = "Invalid username or password."
+                mode = "login"
+            else:
+                cookie_data = {"username": username, "role": "user"}
+                token = encode_cookie(cookie_data)
+                resp = make_response(redirect(url_for("home")))
+                resp.set_cookie("auth", token, httponly=False, samesite="Lax")
+                return resp
 
-            resp = make_response(redirect(url_for("dashboard")))
-            resp.set_cookie(
-                "auth",
-                token,
-                httponly=False,   # intentionally readable by JS / easy to inspect
-                samesite="Lax"
-            )
-            return resp
-
-        error = "Invalid username or password"
-
-    return render_template("login.html", error=error)
+    return render_template("index.html", error=error, mode=mode)
 
 
-@app.route("/dashboard")
-def dashboard():
-    token = request.cookies.get("auth")
-    if not token:
-        return redirect(url_for("login"))
-
-    data = decode_cookie(token)
-    if not data:
-        return redirect(url_for("login"))
-
-    return render_template("dashboard.html", user=data)
+@app.route("/home")
+def home():
+    user = get_current_user()
+    if not user:
+        return redirect(url_for("index"))
+    return render_template("home.html", user=user)
 
 
 @app.route("/admin")
 def admin():
-    token = request.cookies.get("auth")
-    if not token:
-        return redirect(url_for("login"))
+    user = get_current_user()
+    if not user:
+        return redirect(url_for("index"))
 
-    data = decode_cookie(token)
-    if not data:
-        return redirect(url_for("login"))
+    if user.get("role") == "admin":
+        return render_template("admin.html", flag=FLAG, user=user)
 
-    # Weak check: only looks at the role inside the cookie
-    if data.get("role") == "admin":
-        return render_template("admin.html", flag=FLAG, user=data)
-
-    return render_template("denied.html", user=data)
+    return render_template("denied.html", user=user)
 
 
 @app.route("/logout")

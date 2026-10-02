@@ -1,18 +1,39 @@
 {% extends "base.html" %}
-{% block title %}Home - Securinets{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="hero-logo">
-    <h1>Securinets Member Portal</h1>
-    <p>Login to access your dashboard and club resources.</p>
-    <a href="{{ url_for('login') }}" class="btn">Login</a>
-</section>
+<section class="card narrow">
+    <div class="tabs">
+        <a href="?mode=login" class="tab {% if mode != 'register' %}active{% endif %}">Login</a>
+        <a href="?mode=register" class="tab {% if mode == 'register' %}active{% endif %}">Register</a>
+    </div>
 
-<section class="card">
-    <h2>Challenge Info</h2>
-    <p>This is a beginner web challenge about <strong>cookies</strong> and <strong>Base64</strong>.</p>
-    <p>Credentials: <code>guest</code> / <code>guest</code></p>
-    <p>Flag format: <code>Securinets{...}</code></p>
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if mode == 'register' %}
+    <form method="POST">
+        <input type="hidden" name="action" value="register">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus placeholder="Choose a username">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="Choose a password">
+
+        <button type="submit" class="btn">Create account</button>
+    </form>
+    {% else %}
+    <form method="POST">
+        <input type="hidden" name="action" value="login">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus placeholder="Your username">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="Your password">
+
+        <button type="submit" class="btn">Sign in</button>
+    </form>
+    {% endif %}
 </section>
 {% endblock %}

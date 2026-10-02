@@ -14,7 +14,6 @@ body {
     line-height: 1.5;
 }
 
-/* Header */
 header {
     background: #fff;
     border-bottom: 1px solid #e0e0e0;
@@ -22,7 +21,7 @@ header {
 }
 
 .header-inner {
-    max-width: 800px;
+    max-width: 720px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -32,11 +31,7 @@ header {
 .brand {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
     text-decoration: none;
-    color: #1a1a1a;
-    font-weight: 600;
-    font-size: 1.1rem;
 }
 
 .logo {
@@ -44,11 +39,6 @@ header {
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-}
-
-nav {
-    display: flex;
-    gap: 1.25rem;
 }
 
 nav a {
@@ -61,67 +51,61 @@ nav a:hover {
     color: #1a1a1a;
 }
 
-/* Main */
 main {
     flex: 1;
-    max-width: 800px;
+    max-width: 720px;
     width: 100%;
     margin: 0 auto;
     padding: 2rem 1.5rem;
 }
 
-/* Hero */
-.hero {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.hero-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    object-fit: cover;
-}
-
-.hero h1 {
-    font-size: 1.75rem;
-    margin-bottom: 0.4rem;
-}
-
-.hero p {
-    color: #555;
-    margin-bottom: 1.25rem;
-}
-
-/* Cards */
 .card {
     background: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 1.75rem;
-    margin-bottom: 1.5rem;
 }
 
 .card.narrow {
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 380px;
+    margin: 0 auto;
 }
 
-.card h1, .card h2 {
+.card h1 {
     font-size: 1.35rem;
-    margin-bottom: 1rem;
-}
-
-.card p {
     margin-bottom: 0.75rem;
 }
 
-.card hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 1.25rem 0;
+.card p {
+    margin-bottom: 0.5rem;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.tab.active {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+}
+
+.tab:hover {
+    color: #1a1a1a;
 }
 
 /* Form */
@@ -148,29 +132,24 @@ input:focus {
     border-color: #666;
 }
 
-/* Buttons */
 .btn {
     display: inline-block;
     background: #1a1a1a;
     color: #fff;
     border: none;
-    padding: 0.6rem 1.25rem;
+    padding: 0.65rem 1.25rem;
     border-radius: 6px;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
+    width: 100%;
 }
 
 .btn:hover {
     background: #333;
 }
 
-button.btn {
-    width: 100%;
-}
-
-/* Misc */
 .badge {
     display: inline-block;
     background: #eee;
@@ -190,12 +169,6 @@ button.btn {
     font-size: 0.9rem;
 }
 
-.hint {
-    margin-top: 1.25rem;
-    font-size: 0.9rem;
-    color: #666;
-}
-
 .muted {
     color: #666;
     font-size: 0.9rem;
@@ -209,9 +182,8 @@ code {
     font-size: 0.9em;
 }
 
-/* Flag */
 .flag-box {
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     padding: 1rem;
     background: #f8f8f8;
     border: 1px solid #ddd;
@@ -231,22 +203,11 @@ code {
     word-break: break-all;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 1.25rem;
-    color: #888;
+    color: #aaa;
     font-size: 0.85rem;
     border-top: 1px solid #e0e0e0;
     background: #fff;
-}
-
-/* Links inside cards */
-.card a {
-    color: #1a1a1a;
-    font-weight: 500;
-}
-
-.card a:hover {
-    text-decoration: underline;
 }
